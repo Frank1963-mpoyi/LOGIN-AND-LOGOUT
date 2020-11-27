@@ -1,0 +1,12 @@
+{% extends 'blog/base.html'%}
+
+
+{% block content%}
+
+
+<a href="" style="color:blue">{{object.author}}</a><br>
+{{object.date_posted|date:"F d, Y"}}<br>
+<a href="" style="color:blue">{{object.title}}</a><br>
+{{object.content}}<br>
+{% endblock %}
+

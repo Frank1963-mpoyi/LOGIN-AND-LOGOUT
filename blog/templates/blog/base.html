@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'users/css/style.css'  %}">
+    <title></title>
+</head>
+
+<body>
+
+    <nav>
+        <ul class="menu">
+            <li class="logo"><a href="#"><a>Django Blog</a></li>
+            <li class="item">
+                <a href="{% url 'home_view' %}">Home</a>
+            </li>
+
+            <!-- it means if the curent user is login display logout for him to logout the system -->
+            
+            {% if user.is_authenticated %}
+            <li class="item"><a href="{% url 'profile' %}">Profile</a></li> 
+            <li class="item"><a href="{% url 'logout' %}">Logout </a></li>
+            {% else %}
+
+            <!-- if the current user is not login display login for him to login or register for him to make an account -->
+            
+            <li class="item button"><a href="{% url 'login' %}">Login</a></li>
+            <li class="item button secondary"><a href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+            <li class="toggle"><span class="bars"></span></li>
+            <!--humberger menu it must be empty because we design humberger-->
+        </ul>
+    </nav>
+
+    </header>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+    <div class="container">
+        {% block content %}
+
+        {% endblock  %}
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></script>
+<script src="{% static 'blog/js/app.js'  %}"></script> -->
+
+
+
+
+    <script>
+
+        $(function () {
+
+            $(".toggle").on("click", function () {
+
+                if ($(".item").hasClass("active")) {
+                    $(".item").removeClass("active");
+                }
+                else {
+                    $(".item").addClass("active");
+                }
+            })
+        });
+
+
+        // All animations will take exactly 500ms
+        var scroll = new SmoothScroll('a[href*="#"]', {
+            speed: 1500,
+            speedAsDuration: true
+        });
+    </script>
+
+
+</body>
+
+</html>
+
+
+
+
